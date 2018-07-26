@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.romantic.dreamaccount"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -38,4 +38,5 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.8.1'
     //http rxjava retorfit end
     implementation 'com.alibaba:fastjson:1.2.32'
+    implementation 'com.android.support:design:27.1.1'
 }
