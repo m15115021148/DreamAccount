@@ -143,4 +143,28 @@ public abstract class BaseActivity<P extends Presenter<V>, V extends BaseView> e
         return super.onKeyDown(keyCode, event);
     }
 
+    protected void startActivity(Class<?> cls, Bundle bundle){
+        Intent intent = new Intent(this,cls);
+        if (bundle != null){
+            intent.putExtras(bundle);
+        }
+        startActivity(intent);
+    }
+
+    protected void startActivity(Class<?> cls){
+        startActivity(cls,null);
+    }
+
+    protected void startActivityForResult(Class<?> cls, Bundle bundle,int requestCode){
+        Intent intent = new Intent(this,cls);
+        if (bundle != null){
+            intent.putExtras(bundle);
+        }
+        startActivityForResult(intent,requestCode);
+    }
+
+    protected void startActivityForResult(Class<?> cls, int requestCode){
+        startActivityForResult(cls,null,requestCode);
+    }
+
 }
