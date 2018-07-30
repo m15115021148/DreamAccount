@@ -7,6 +7,8 @@ import android.view.View;
 import com.romantic.dreamaccount.R;
 import com.romantic.dreamaccount.adapter.MainFragmentAdapter;
 import com.romantic.dreamaccount.fragment.BaseFragment;
+import com.romantic.dreamaccount.fragment.CheckFragment;
+import com.romantic.dreamaccount.fragment.ListFragment;
 import com.romantic.dreamaccount.fragment.MySelfFragment;
 import com.romantic.dreamaccount.mvp.presenter.base.Presenter;
 
@@ -49,8 +51,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,T
     }
 
     private void initTabLayout() {
-        mFragmentList.add(new MySelfFragment());
-        mFragmentList.add(new MySelfFragment());
+        mFragmentList.add(new ListFragment());
+        mFragmentList.add(new CheckFragment());
         mFragmentList.add(new MySelfFragment());
 
         mTabLayout.removeAllTabs();
