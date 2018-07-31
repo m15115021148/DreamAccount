@@ -1,8 +1,10 @@
 package com.romantic.dreamaccount.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +18,16 @@ import butterknife.Unbinder;
 public abstract class BaseFragment extends Fragment {
     protected boolean isInit = false;//视图是否已经初初始化
     protected boolean isLoad = false;//是否加载
-    protected final String TAG = "BaseFragment";
+    protected final String TAG = this.getClass().getSimpleName();
     private View view;//视图
     private Unbinder butterKnife;//取消绑定
+    protected FragmentActivity mContext;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(setContentView(), container, false);
-        butterKnife = ButterKnife.bind(this,view);
+        butterKnife = ButterKnife.bind(this, view);
         isInit = true;
         initData();
         isCanLoadData();
@@ -35,6 +38,12 @@ public abstract class BaseFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         isCanLoadData();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = getActivity();
     }
 
     private void isCanLoadData() {
@@ -61,14 +70,14 @@ public abstract class BaseFragment extends Fragment {
     }
 
     /**
-     * 设置Fragment要显示的布局
+     * set layout view id
      *
      * @return 布局的layoutId
      */
     protected abstract int setContentView();
 
     /**
-     * 获取设置的布局
+     * get content view
      *
      * @return
      */
@@ -76,9 +85,9 @@ public abstract class BaseFragment extends Fragment {
         return view;
     }
 
-    protected abstract void startLoad();
+    protected abstract void initData();//init data or net data
 
-    protected abstract void initData();//初始化数据
+    protected abstract void startLoad();//view show
 
     protected void stopLoad() {
     }

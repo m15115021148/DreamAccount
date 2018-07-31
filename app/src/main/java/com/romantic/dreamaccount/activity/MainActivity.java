@@ -57,7 +57,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,T
 
         mTabLayout.removeAllTabs();
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
-        mViewPager.setOffscreenPageLimit(1);
+        mViewPager.setOffscreenPageLimit(2);
         mAdapter = new MainFragmentAdapter(getSupportFragmentManager(), mData, mFragmentList, mContext);
         mViewPager.setAdapter(mAdapter);
         //绑定ViewPager
