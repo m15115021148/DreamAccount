@@ -4,4 +4,7 @@
     <string name="tab_list">列表</string>
     <string name="tab_data">数据</string>
     <string name="tab_self">我的</string>
+
+    <string name="account_money"><![CDATA[金额：<font color="%1$s">%2$.1f</font>]]></string>
+    <string name="account_detail"><![CDATA[描述：<font color="#999999">%1$s</font>]]></string>
 </resources>

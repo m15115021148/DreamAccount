@@ -1,16 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:background="@drawable/account_list_bg"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/x20"
+    android:layout_marginBottom="@dimen/x20"
+    android:layout_marginStart="@dimen/x30"
+    android:layout_marginEnd="@dimen/x30"
+    android:padding="@dimen/x20">
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/x20"
-        android:text="test"
-        android:textColor="@color/black"
-        android:textSize="@dimen/x30" />
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x300"
+        android:layout_weight="1"
+        android:src="@color/pop_txt_bg" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:paddingTop="@dimen/x20">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/x20"
+            android:singleLine="true"
+            android:text="消费"
+            android:textColor="@color/black"
+            android:textSize="@dimen/x32"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/name"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/name"
+            android:gravity="end|center_vertical"
+            android:singleLine="true"
+            android:text="2018-08-01 12:00"
+            android:textColor="@color/color3"
+            android:textSize="@dimen/x24" />
+
+        <TextView
+            android:id="@+id/money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/name"
+            android:layout_below="@+id/name"
+            android:layout_marginTop="@dimen/x30"
+            android:text="@string/account_money"
+            android:textColor="@color/black"
+            android:textSize="@dimen/x28" />
+
+
+        <TextView
+            android:id="@+id/detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/name"
+            android:layout_below="@+id/money"
+            android:layout_marginTop="@dimen/x30"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@string/account_detail"
+            android:textColor="@color/black"
+            android:textSize="@dimen/x28" />
+
+
+        <LinearLayout
+            android:id="@+id/addressLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/name"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/x10">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/icon_point" />
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/x10"
+                android:singleLine="true"
+                android:text="上海"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/x28" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>
