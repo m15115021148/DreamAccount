@@ -8,6 +8,7 @@ import com.romantic.dreamaccount.R;
 import com.romantic.dreamaccount.adapter.MainFragmentAdapter;
 import com.romantic.dreamaccount.fragment.BaseFragment;
 import com.romantic.dreamaccount.fragment.CheckFragment;
+import com.romantic.dreamaccount.fragment.ForecastFragment;
 import com.romantic.dreamaccount.fragment.ListFragment;
 import com.romantic.dreamaccount.fragment.MySelfFragment;
 import com.romantic.dreamaccount.mvp.presenter.base.Presenter;
@@ -52,12 +53,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,T
 
     private void initTabLayout() {
         mFragmentList.add(new ListFragment());
+        mFragmentList.add(new ForecastFragment());
         mFragmentList.add(new CheckFragment());
         mFragmentList.add(new MySelfFragment());
 
         mTabLayout.removeAllTabs();
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
-        mViewPager.setOffscreenPageLimit(2);
+        mViewPager.setOffscreenPageLimit(3);
         mAdapter = new MainFragmentAdapter(getSupportFragmentManager(), mData, mFragmentList, mContext);
         mViewPager.setAdapter(mAdapter);
         //绑定ViewPager

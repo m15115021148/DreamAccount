@@ -1,9 +1,11 @@
 package com.romantic.dreamaccount.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.romantic.dreamaccount.R;
+import com.romantic.dreamaccount.activity.TestActivity;
 import com.romantic.dreamaccount.adapter.FragmentListAdapter;
 import com.romantic.dreamaccount.bean.AccountsBean;
 
@@ -54,7 +56,8 @@ public class ListFragment extends BaseFragment implements FragmentListAdapter.On
 
     @Override
     public void onItemClickListener(int position) {
-
+        Intent intent = new Intent(mContext, TestActivity.class);
+        startActivity(intent);
     }
 
     @Override
