@@ -6,4 +6,10 @@
         <item>@string/tab_data</item>
         <item>@string/tab_self</item>
     </string-array>
+
+    <string-array name="MySelfList">
+        <item>@string/myself_info</item>
+        <item>@string/myself_about</item>
+        <item>@string/myself_settings</item>
+    </string-array>
 </resources>

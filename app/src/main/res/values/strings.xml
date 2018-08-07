@@ -8,4 +8,8 @@
 
     <string name="account_money"><![CDATA[金额：<font color="%1$s">%2$.1f</font>]]></string>
     <string name="account_detail"><![CDATA[描述：<font color="#999999">%1$s</font>]]></string>
+
+    <string name="myself_info">个人信息</string>
+    <string name="myself_about">关于</string>
+    <string name="myself_settings">设置</string>
 </resources>

@@ -6,6 +6,15 @@ package com.romantic.dreamaccount.bean;
 public class TypeBean {
     private String name;
     private int res;
+    private int resColor;
+
+    public int getResColor() {
+        return resColor;
+    }
+
+    public void setResColor(int resColor) {
+        this.resColor = resColor;
+    }
 
     public String getName() {
         return name;
