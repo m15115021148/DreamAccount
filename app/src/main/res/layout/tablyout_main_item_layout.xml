@@ -10,7 +10,7 @@
         android:id="@+id/img"
         android:layout_width="@dimen/x48"
         android:layout_height="@dimen/x48"
-        android:src="@color/red_dan" />
+        android:src="@drawable/menu_home_bg" />
 
     <TextView
         android:id="@+id/name"
