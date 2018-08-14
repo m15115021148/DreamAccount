@@ -6,6 +6,12 @@ import android.widget.Toast;
 import com.romantic.dreamaccount.application.MyApplication;
 
 public class ToastUtil {
+	private static Toast mToast;
+
+	public ToastUtil(){
+		if (mToast == null)
+			mToast = new Toast(MyApplication.getInstance().getApplicationContext());
+	}
 
 	/**
 	 * 显示时间两秒，位置居中
@@ -14,9 +20,12 @@ public class ToastUtil {
 	 *            显示的内容
 	 */
 	public static void showCenterShort(String title) {
-		Toast toast = Toast.makeText(MyApplication.getInstance().getApplicationContext(), title, Toast.LENGTH_SHORT);
-		toast.setGravity(Gravity.CENTER, 0, 0);
-		toast.show();
+		if (mToast != null){
+			mToast.setText(title);
+			mToast.setDuration(Toast.LENGTH_SHORT);
+			mToast.setGravity(Gravity.CENTER, 0, 0);
+			mToast.show();
+		}
 	}
 
 	/**
@@ -24,10 +33,12 @@ public class ToastUtil {
 	 * 
 	 * @param title
 	 */
-	@SuppressWarnings("deprecation")
 	public static void showBottomShort(String title) {
-		Toast toast = Toast.makeText(MyApplication.getInstance().getApplicationContext(), title, Toast.LENGTH_SHORT);
-		toast.setGravity(Gravity.BOTTOM, 0, MyApplication.getInstance().screenHeight/100);
-		toast.show();
+		if (mToast != null){
+			mToast.setText(title);
+			mToast.setDuration(Toast.LENGTH_SHORT);
+			mToast.setGravity(Gravity.BOTTOM, 0, MyApplication.getInstance().screenHeight/100);
+			mToast.show();
+		}
 	}
 }
