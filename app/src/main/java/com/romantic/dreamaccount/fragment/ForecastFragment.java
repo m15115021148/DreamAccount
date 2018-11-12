@@ -1,11 +1,9 @@
 package com.romantic.dreamaccount.fragment;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 
 import com.romantic.dreamaccount.R;
-import com.romantic.dreamaccount.activity.TestActivity;
 
 import butterknife.BindView;
 
@@ -26,8 +24,7 @@ public class ForecastFragment extends BaseFragment {
         mTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, TestActivity.class);
-                startActivity(intent);
+
             }
         });
     }

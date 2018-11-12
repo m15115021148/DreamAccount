@@ -1,14 +1,17 @@
 package com.romantic.dreamaccount.config;
 
 /**
- * Created by ${chenM} on ${2017}.
+ * Created by ${chenM} on 2018/10/25.
  */
 public class WebConfig {
-    private static final String HOST_ADDRESS = "http://116.62.205.204:7000/meiglink/";
+    public static final String HOST_ADDRESS_IP_TESTING = "https://sit.senhome.com.cn";
 
-    private static final String HOST_NAME = HOST_ADDRESS + "api/v1/";
+    public static final String HOST_ADDRESS_IP_PRODUCT = "https://api.senhome.com.cn";
 
-    public static String getHostName() {
-        return HOST_NAME;
+    public static String baseUrl;
+
+    public static String getBaseUrl() {
+        return baseUrl;
     }
+
 }

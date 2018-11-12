@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--从屏幕上面退出-->
+    <!--<translate xmlns:android="http://schemas.android.com/apk/res/android"-->
+
+        <!--android:interpolator="@android:anim/accelerate_interpolator"-->
+
+        <!--android:fromYDelta="0%p"-->
+
+        <!--android:toYDelta="-100%p"-->
+
+        <!--android:duration="1000">-->
+
+    <!--</translate>-->
+
+    <!--<translate-->
+        <!--android:fromYDelta="0"-->
+        <!--android:toYDelta="0"-->
+        <!--android:duration="1500"/>-->
+
+    <!--<translate-->
+        <!--android:fromYDelta="0"-->
+        <!--android:toYDelta="100%p"-->
+        <!--android:duration="800"/>-->
+
+    <translate
+        android:duration="800"
+        android:fromYDelta="0.0%"
+        android:toYDelta="100.0%" />
+
+</set>

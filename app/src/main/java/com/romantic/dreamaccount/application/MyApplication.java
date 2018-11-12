@@ -1,14 +1,12 @@
 package com.romantic.dreamaccount.application;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 
+import com.romantic.dreamaccount.R;
+import com.romantic.dreamaccount.config.SDKConfig;
 import com.romantic.dreamaccount.log.LogUtil;
 
 /**
@@ -23,6 +21,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         getScreenSize();
+        initConfig();
     }
 
 
@@ -36,6 +35,10 @@ public class MyApplication extends Application {
         instance = this;
     }
 
+    private void initConfig(){
+        SDKConfig.initHttp(getApplicationContext(),environmentConfiguration());
+    }
+
     /**
      * 获取屏幕尺寸
      */
@@ -46,46 +49,15 @@ public class MyApplication extends Application {
         LogUtil.w("height:" + screenHeight + " width:" + screenWidth);
     }
 
-    /**
-     * get version name
-     *
-     * @return name
-     */
-    public String getVersionName() {
+    private String environmentConfiguration() {
+        String type = getString(R.string.environment_configuration_testing);
         try {
-            PackageManager pm = getPackageManager();
-            PackageInfo info = pm.getPackageInfo(getPackageName(), 0);
-            return info.versionName;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
-     * get App versionCode
-     *
-     * @return code
-     */
-    public String getVersionCode() {
-        PackageManager packageManager = getApplicationContext().getPackageManager();
-        PackageInfo packageInfo;
-        String versionCode = "";
-        try {
-            packageInfo = packageManager.getPackageInfo(getApplicationContext().getPackageName(), 0);
-            versionCode = packageInfo.versionCode + "";
+            type = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA)
+                    .metaData.getString("type");
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        return versionCode;
+        return type;
     }
 
-    /**
-     * 获取手机设备id
-     */
-    @SuppressLint("MissingPermission")
-    public String getDeviceID(Activity activity) {
-        TelephonyManager tm = (TelephonyManager) activity.getSystemService(Context.TELEPHONY_SERVICE);
-        return tm.getDeviceId();
-    }
 }
