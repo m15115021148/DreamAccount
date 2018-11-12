@@ -9,6 +9,7 @@
 
         <item name="android:launchMode">singleTask</item>
         <item name="android:windowNoTitle">true</item>
+
     </style>
 
     <style name="MySelfInfoTextViewStyle">
