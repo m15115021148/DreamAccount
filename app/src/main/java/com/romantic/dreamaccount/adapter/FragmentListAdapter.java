@@ -7,33 +7,35 @@ import android.widget.TextView;
 
 import com.romantic.dreamaccount.R;
 import com.romantic.dreamaccount.bean.AccountsBean;
+import com.sensology.framelib.adapter.BaseViewHolder;
+import com.sensology.framelib.adapter.XRecyclerViewAdapter;
 
 import butterknife.BindView;
 
 /**
  * Created by ${chenM} on 2018/7/30.
  */
-public class FragmentListAdapter extends BaseAdapter<AccountsBean, FragmentListAdapter.Holder> {
+public class FragmentListAdapter extends XRecyclerViewAdapter<AccountsBean> {
     private OnFragmentListCallBack mCallBack;
 
     public FragmentListAdapter(OnFragmentListCallBack callBack) {
         this.mCallBack = callBack;
     }
 
-    public interface OnFragmentListCallBack {
-        void onItemClickListener(int position);
-
-        void onLocationListener(int position);
-    }
-
     @Override
-    protected int getLayoutId(int viewType) {
+    public int getLayoutId() {
         return R.layout.fragment_list_item_layout;
     }
 
     @Override
-    protected Holder getViewHolder(View view) {
+    public BaseViewHolder onBindViewHolder(View view) {
         return new Holder(view);
+    }
+
+    public interface OnFragmentListCallBack {
+        void onItemClickListener(int position);
+
+        void onLocationListener(int position);
     }
 
     public class Holder extends BaseViewHolder {
@@ -59,8 +61,8 @@ public class FragmentListAdapter extends BaseAdapter<AccountsBean, FragmentListA
         }
 
         @Override
-        protected void initData(final int position) {
-            AccountsBean model = list.get(position);
+        public void initData(final int position) {
+            AccountsBean model = getData().get(position);
 
             mName.setText(model.getKind());
             mTime.setText(model.getTime());

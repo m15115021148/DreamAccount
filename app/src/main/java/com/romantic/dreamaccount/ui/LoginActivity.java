@@ -74,6 +74,8 @@ public class LoginActivity extends BaseActivity<LoginP> {
     public void login(LoginResult result,String pwd){
         SharedPref.getInstance(context).putString(Comment.PrefKey.USER_NAME,result.getName());
         SharedPref.getInstance(context).putString(Comment.PrefKey.USER_PWD,pwd);
+        SharedPref.getInstance(context).putString(Comment.PrefKey.USER_ID,result.getUserID());
+        Comment.USER_ID = result.getUserID();
 
         Router.newIntent(context)
                 .to(MainActivity.class)

@@ -7,6 +7,7 @@ import android.util.DisplayMetrics;
 
 import com.romantic.dreamaccount.R;
 import com.romantic.dreamaccount.config.SDKConfig;
+import com.romantic.dreamaccount.db.DBAccount;
 import com.romantic.dreamaccount.log.LogUtil;
 
 /**
@@ -16,10 +17,12 @@ public class MyApplication extends Application {
     private static MyApplication instance;
     public int screenWidth = 0;
     public int screenHeight = 0;
+    public DBAccount Db;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        Db = new DBAccount(getApplicationContext());
         getScreenSize();
         initConfig();
     }

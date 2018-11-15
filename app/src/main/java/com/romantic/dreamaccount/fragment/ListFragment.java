@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import com.romantic.dreamaccount.R;
 import com.romantic.dreamaccount.adapter.FragmentListAdapter;
 import com.romantic.dreamaccount.bean.AccountsBean;
+import com.romantic.dreamaccount.present.fragment.ListFragmentP;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import butterknife.BindView;
 /**
  * Created by ${chenM} on 2018/7/26.
  */
-public class ListFragment extends BaseFragment implements FragmentListAdapter.OnFragmentListCallBack {
+public class ListFragment extends BaseFragment<ListFragmentP> implements FragmentListAdapter.OnFragmentListCallBack {
     @BindView(R.id.recyclerView)
     public RecyclerView mRecyclerView;
     private FragmentListAdapter mAdapter;
@@ -27,8 +28,8 @@ public class ListFragment extends BaseFragment implements FragmentListAdapter.On
     }
 
     @Override
-    public Object newP() {
-        return null;
+    public ListFragmentP newP() {
+        return new ListFragmentP();
     }
 
     @Override

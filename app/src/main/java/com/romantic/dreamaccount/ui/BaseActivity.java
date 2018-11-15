@@ -7,11 +7,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.Vibrator;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
 import com.romantic.dreamaccount.R;
+import com.romantic.dreamaccount.config.Comment;
 import com.romantic.dreamaccount.config.Constants;
 import com.romantic.dreamaccount.eventBus.ExitAppEvent;
 import com.sensology.framelib.cache.SharedPref;
@@ -176,11 +178,16 @@ public abstract class BaseActivity<P extends IPresent> extends XActivity<P> impl
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
+        if (!TextUtils.isEmpty(Comment.USER_ID)) {
+            SharedPref.getInstance(this).putString(Comment.PrefKey.USER_ID, Comment.USER_ID);
+        }
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+        String token = SharedPref.getInstance(this).getString(Comment.PrefKey.USER_ID, "");
+        if (!TextUtils.isEmpty(token)) Comment.USER_ID = token;
     }
 
 }
