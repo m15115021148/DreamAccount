@@ -1,36 +1,37 @@
 package com.romantic.dreamaccount.fragment;
 
-import android.view.View;
-import android.widget.Button;
+import android.os.Bundle;
 
 import com.romantic.dreamaccount.R;
 
-import butterknife.BindView;
 
 /**
  * Created by ${chenM} on 2018/8/1.
  */
 public class ForecastFragment extends BaseFragment {
-    @BindView(R.id.test)
-    public Button mTest;
 
     @Override
-    protected int setContentView() {
+    public int getLayoutId() {
         return R.layout.fragment_forecast_layout;
     }
 
     @Override
-    protected void initData() {
-        mTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+    public Object newP() {
+        return null;
     }
 
     @Override
-    protected void startLoad() {
+    public void initData(Bundle savedInstanceState) {
 
+    }
+
+    @Override
+    protected void onStopLazy() {
+        super.onStopLazy();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
     }
 }

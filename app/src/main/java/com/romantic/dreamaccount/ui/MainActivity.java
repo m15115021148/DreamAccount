@@ -12,7 +12,7 @@ import com.romantic.dreamaccount.fragment.CheckFragment;
 import com.romantic.dreamaccount.fragment.ForecastFragment;
 import com.romantic.dreamaccount.fragment.ListFragment;
 import com.romantic.dreamaccount.fragment.MySelfFragment;
-import com.romantic.dreamaccount.present.MainP;
+import com.romantic.dreamaccount.present.ui.MainP;
 
 import java.util.ArrayList;
 import java.util.List;

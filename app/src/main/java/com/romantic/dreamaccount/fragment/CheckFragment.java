@@ -1,5 +1,7 @@
 package com.romantic.dreamaccount.fragment;
 
+import android.os.Bundle;
+
 import com.romantic.dreamaccount.R;
 
 /**
@@ -8,17 +10,27 @@ import com.romantic.dreamaccount.R;
 public class CheckFragment extends BaseFragment {
 
     @Override
-    protected int setContentView() {
+    public int getLayoutId() {
         return R.layout.fragment_check_layout;
     }
 
     @Override
-    protected void startLoad() {
+    public Object newP() {
+        return null;
+    }
+
+    @Override
+    public void initData(Bundle savedInstanceState) {
 
     }
 
     @Override
-    protected void initData() {
+    protected void onStartLazy() {
+        super.onStartLazy();
+    }
 
+    @Override
+    protected void onStopLazy() {
+        super.onStopLazy();
     }
 }

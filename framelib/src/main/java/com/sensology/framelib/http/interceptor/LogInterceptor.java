@@ -5,6 +5,7 @@ import android.util.Log;
 import com.sensology.framelib.log.XLog;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import okhttp3.Headers;
 import okhttp3.Interceptor;
@@ -14,6 +15,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okio.Buffer;
+import okio.BufferedSink;
 
 
 public class LogInterceptor implements Interceptor {
@@ -43,7 +45,7 @@ public class LogInterceptor implements Interceptor {
                 MediaType mediaType = requestBody.contentType();
                 if (mediaType != null) {
                     if (isText(mediaType)) {
-                        XLog.d(TAG, "params : " + bodyToString(request));
+                        Log.d(TAG, "params : " + bodyToString(request));
                     } else {
                         XLog.d(TAG, "params : " + " maybe [file part] , too large too print , ignored!");
                     }

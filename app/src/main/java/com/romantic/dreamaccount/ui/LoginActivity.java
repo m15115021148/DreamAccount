@@ -10,10 +10,9 @@ import android.widget.TextView;
 import com.romantic.dreamaccount.R;
 import com.romantic.dreamaccount.bean.LoginResult;
 import com.romantic.dreamaccount.config.Comment;
-import com.romantic.dreamaccount.present.LoginP;
+import com.romantic.dreamaccount.present.ui.LoginP;
 import com.romantic.dreamaccount.util.ToastUtil;
 import com.sensology.framelib.cache.SharedPref;
-import com.sensology.framelib.kit.Kits;
 import com.sensology.framelib.router.Router;
 
 import butterknife.BindView;

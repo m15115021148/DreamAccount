@@ -1,4 +1,4 @@
-package com.romantic.dreamaccount.present;
+package com.romantic.dreamaccount.present.ui;
 
 import com.romantic.dreamaccount.ui.MainActivity;
 import com.sensology.framelib.mvp.present.XPresent;

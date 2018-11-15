@@ -1,6 +1,6 @@
 package com.romantic.dreamaccount.fragment;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -22,31 +22,42 @@ public class ListFragment extends BaseFragment implements FragmentListAdapter.On
     private FragmentListAdapter mAdapter;
 
     @Override
-    protected int setContentView() {
+    public int getLayoutId() {
         return R.layout.fragment_list_layout;
     }
 
     @Override
-    protected void startLoad() {
+    public Object newP() {
+        return null;
+    }
+
+    @Override
+    public void initData(Bundle savedInstanceState) {
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        mAdapter = new FragmentListAdapter(this);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void onStartLazy() {
+        super.onStartLazy();
         if (mAdapter != null) mAdapter.setData(getData());
     }
 
     @Override
-    protected void initData() {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        mAdapter = new FragmentListAdapter(this);
-        mRecyclerView.setAdapter(mAdapter);
+    protected void onStopLazy() {
+        super.onStopLazy();
     }
 
     private List<AccountsBean> getData() {
         List<AccountsBean> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             AccountsBean bean = new AccountsBean();
-            bean.setType(i%2);
-            bean.setKind("消费"+i);
-            bean.setTime(String.valueOf(2018+i));
-            bean.setMoney(100+i);
-            bean.setNote("test"+i);
+            bean.setType(i % 2);
+            bean.setKind("消费" + i);
+            bean.setTime(String.valueOf(2018 + i));
+            bean.setMoney(100 + i);
+            bean.setNote("test" + i);
             bean.setAddress("China");
             list.add(bean);
         }

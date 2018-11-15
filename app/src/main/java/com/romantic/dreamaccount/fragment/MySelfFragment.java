@@ -1,6 +1,7 @@
 package com.romantic.dreamaccount.fragment;
 
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -25,22 +26,33 @@ public class MySelfFragment extends BaseFragment implements MySelfListAdapter.On
     private int[] resColor = {Color.parseColor("#32a5e3"),Color.parseColor("#32a5e3"),Color.parseColor("#32a5e3")};
     private int[] res = {R.drawable.myself_info_bg,R.drawable.myself_about_bg,R.drawable.myself_settings_bg};
 
+
     @Override
-    protected int setContentView() {
+    public int getLayoutId() {
         return R.layout.fragment_myself_layout;
     }
 
     @Override
-    protected void startLoad() {
-
+    public Object newP() {
+        return null;
     }
 
     @Override
-    protected void initData() {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+    public void initData(Bundle savedInstanceState) {
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         MySelfListAdapter mAdapter = new MySelfListAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setData(getData(mData));
+    }
+
+    @Override
+    protected void onStartLazy() {
+        super.onStartLazy();
+    }
+
+    @Override
+    protected void onStopLazy() {
+        super.onStopLazy();
     }
 
     private List<TypeBean> getData(String[] str){
@@ -59,4 +71,5 @@ public class MySelfFragment extends BaseFragment implements MySelfListAdapter.On
     public void onItemClickListener(int position) {
 
     }
+
 }
