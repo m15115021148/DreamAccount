@@ -25,6 +25,9 @@
             android:value="${TYPE}" />
 
         <activity android:name=".ui.MainActivity">
+
+        </activity>
+        <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

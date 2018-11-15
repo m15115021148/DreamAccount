@@ -68,7 +68,6 @@ public abstract class BaseActivity<P extends IPresent> extends XActivity<P> impl
                     public void accept(ExitAppEvent exitApp) throws Exception {
                         if (exitApp.isExit() && exitApp.isLogin()) {
 
-                            finish();
                         } else if (exitApp.isExit()) {
                             BusProvider.getBus().unregister(this);
                             finish();

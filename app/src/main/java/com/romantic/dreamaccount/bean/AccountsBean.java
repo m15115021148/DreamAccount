@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by ${chenM} on 2018/7/31.
  */
-public class AccountsBean extends BaseBean implements Serializable {
+public class AccountsBean extends BaseResult implements Serializable {
     private int id ;//本地id
     private int type;//0 收入  1支出
     private String time;

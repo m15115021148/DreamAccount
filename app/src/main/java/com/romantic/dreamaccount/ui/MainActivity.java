@@ -52,6 +52,11 @@ public class MainActivity extends BaseActivity<MainP> implements TabLayout.OnTab
 
     }
 
+    @Override
+    public void onBackPressed() {
+        exitApp();
+    }
+
     private void initTabLayout() {
         mFragmentList.add(new ListFragment());
         mFragmentList.add(new ForecastFragment());
