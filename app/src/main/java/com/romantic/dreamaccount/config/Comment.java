@@ -9,7 +9,7 @@ public class Comment {
     public static final int SUCCESS = 1;
     public static final int FAILURE = 0;
 
-    public static String USER_ID = "";
+    public static int USER_ID = 0;
 
     public static class PrefKey{
         public static final String USER_NAME = "user_name";

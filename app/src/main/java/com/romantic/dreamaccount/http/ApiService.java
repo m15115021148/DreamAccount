@@ -1,6 +1,7 @@
 package com.romantic.dreamaccount.http;
 
 
+import com.romantic.dreamaccount.bean.AccountResult;
 import com.romantic.dreamaccount.bean.BaseResult;
 import com.romantic.dreamaccount.bean.LoginResult;
 
@@ -32,6 +33,10 @@ public interface ApiService {
     @POST("dbAction_uploadAccount.do")
     @FormUrlEncoded
     Flowable<BaseResult> uploadAccount(@FieldMap Map<String, Object> map);
+
+    @POST("dbAction_getAccountList.do")
+    @FormUrlEncoded
+    Flowable<AccountResult> getAccountList(@FieldMap Map<String, Object> map);
 
 
     @Multipart

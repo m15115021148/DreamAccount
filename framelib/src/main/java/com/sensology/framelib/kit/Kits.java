@@ -1014,6 +1014,26 @@ public class Kits {
             return calendar.getTimeInMillis();
         }
 
+        /**
+         * 获取当前时间 yyyy-MM-dd HH:mm:ss
+         * @return
+         */
+        public static String getCurrentTime() {
+            return ymdhms.format(Calendar.getInstance().getTime());
+        }
+
+        /**
+         * 获取当前时间的前几个小时 yyyy-MM-dd HH:mm:ss
+         * @param hour 小时
+         * @return
+         */
+        public static String getCurrentAgeTime(int hour){
+            Calendar calendar = Calendar.getInstance();
+            /* HOUR_OF_DAY 指示一天中的小时 */
+            calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - hour);
+            return ymdhms.format(calendar.getTime());
+        }
+
     }
 
 

@@ -178,16 +178,16 @@ public abstract class BaseActivity<P extends IPresent> extends XActivity<P> impl
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
-        if (!TextUtils.isEmpty(Comment.USER_ID)) {
-            SharedPref.getInstance(this).putString(Comment.PrefKey.USER_ID, Comment.USER_ID);
+        if (Comment.USER_ID <= 0) {
+            SharedPref.getInstance(this).putInt(Comment.PrefKey.USER_ID, Comment.USER_ID);
         }
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        String token = SharedPref.getInstance(this).getString(Comment.PrefKey.USER_ID, "");
-        if (!TextUtils.isEmpty(token)) Comment.USER_ID = token;
+        int token = SharedPref.getInstance(this).getInt(Comment.PrefKey.USER_ID, 0);
+        if (Comment.USER_ID <= 0) Comment.USER_ID = token;
     }
 
 }

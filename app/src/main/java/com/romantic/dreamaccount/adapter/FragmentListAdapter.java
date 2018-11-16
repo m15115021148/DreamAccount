@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.romantic.dreamaccount.R;
+import com.romantic.dreamaccount.bean.AccountResult;
 import com.romantic.dreamaccount.bean.AccountsBean;
 import com.sensology.framelib.adapter.BaseViewHolder;
 import com.sensology.framelib.adapter.XRecyclerViewAdapter;
@@ -15,7 +16,7 @@ import butterknife.BindView;
 /**
  * Created by ${chenM} on 2018/7/30.
  */
-public class FragmentListAdapter extends XRecyclerViewAdapter<AccountsBean> {
+public class FragmentListAdapter extends XRecyclerViewAdapter<AccountResult.Data> {
     private OnFragmentListCallBack mCallBack;
 
     public FragmentListAdapter(OnFragmentListCallBack callBack) {
@@ -62,7 +63,7 @@ public class FragmentListAdapter extends XRecyclerViewAdapter<AccountsBean> {
 
         @Override
         public void initData(final int position) {
-            AccountsBean model = getData().get(position);
+            AccountResult.Data model = getData().get(position);
 
             mName.setText(model.getKind());
             mTime.setText(model.getTime());

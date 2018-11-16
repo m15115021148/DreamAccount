@@ -15,6 +15,7 @@ public abstract class XRecyclerViewAdapter<T> extends RecyclerView.Adapter<BaseV
 
     public void setData(List<T> data) {
         this.data = data;
+        this.notifyDataSetChanged();
     }
 
     public void setData(T[] data) {

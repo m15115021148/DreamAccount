@@ -6,10 +6,13 @@ import android.support.v7.widget.RecyclerView;
 
 import com.romantic.dreamaccount.R;
 import com.romantic.dreamaccount.adapter.FragmentListAdapter;
+import com.romantic.dreamaccount.bean.AccountResult;
 import com.romantic.dreamaccount.bean.AccountsBean;
 import com.romantic.dreamaccount.present.fragment.ListFragmentP;
+import com.sensology.framelib.kit.Kits;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -42,27 +45,12 @@ public class ListFragment extends BaseFragment<ListFragmentP> implements Fragmen
     @Override
     protected void onStartLazy() {
         super.onStartLazy();
-        if (mAdapter != null) mAdapter.setData(getData());
+        getP().getAccount(Kits.Date.getCurrentAgeTime(24*3),Kits.Date.getCurrentTime());
     }
 
     @Override
     protected void onStopLazy() {
         super.onStopLazy();
-    }
-
-    private List<AccountsBean> getData() {
-        List<AccountsBean> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            AccountsBean bean = new AccountsBean();
-            bean.setType(i % 2);
-            bean.setKind("消费" + i);
-            bean.setTime(String.valueOf(2018 + i));
-            bean.setMoney(100 + i);
-            bean.setNote("test" + i);
-            bean.setAddress("China");
-            list.add(bean);
-        }
-        return list;
     }
 
     @Override
@@ -73,5 +61,9 @@ public class ListFragment extends BaseFragment<ListFragmentP> implements Fragmen
     @Override
     public void onLocationListener(int position) {
 
+    }
+
+    public void getAccountSuccess(AccountResult result){
+        mAdapter.setData(result.getData());
     }
 }

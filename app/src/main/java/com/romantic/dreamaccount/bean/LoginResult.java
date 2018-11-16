@@ -9,7 +9,7 @@ public class LoginResult extends BaseResult {
     private String sex;
     private String telphone;
     private String photo;
-    private String userID;
+    private int userID;
     private String age;
 
     public String getName() {
@@ -52,11 +52,11 @@ public class LoginResult extends BaseResult {
         this.photo = photo;
     }
 
-    public String getUserID() {
+    public int getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(int userID) {
         this.userID = userID;
     }
 
