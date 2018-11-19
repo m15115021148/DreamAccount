@@ -7,13 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import com.romantic.dreamaccount.R;
 import com.romantic.dreamaccount.adapter.FragmentListAdapter;
 import com.romantic.dreamaccount.bean.AccountResult;
-import com.romantic.dreamaccount.bean.AccountsBean;
 import com.romantic.dreamaccount.present.fragment.ListFragmentP;
 import com.sensology.framelib.kit.Kits;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import butterknife.BindView;
 
