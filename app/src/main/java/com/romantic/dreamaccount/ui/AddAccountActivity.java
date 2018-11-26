@@ -7,10 +7,14 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
 import com.romantic.dreamaccount.R;
 import com.romantic.dreamaccount.adapter.AddAccountKindAdapter;
+import com.romantic.dreamaccount.application.MyApplication;
 import com.romantic.dreamaccount.bean.KindResult;
 import com.romantic.dreamaccount.present.ui.AddAccountP;
+import com.romantic.dreamaccount.service.LocationService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +35,7 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
     public TextView mIncome;
     private int type = 1;// 1 expenses; 0 income
     private List<KindResult.Data> mKindList = new ArrayList<>();
+    private LocationService locationService;
 
     @Override
     public int getLayoutId() {
@@ -59,6 +64,33 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
         mRecyclerView.setLayoutManager(new GridLayoutManager(context, 5));
         mAdapter = new AddAccountKindAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initLocationService();
+    }
+
+    @Override
+    protected void onStop() {
+        locationService.unregisterListener(mLocationListener);
+        locationService.stop();
+        super.onStop();
+
+    }
+
+    private void initLocationService(){
+        locationService = MyApplication.getInstance().locationService;
+        locationService.registerListener(mLocationListener);
+        //注册监听
+        int type = getIntent().getIntExtra("from", 0);
+        if (type == 0) {
+            locationService.setLocationOption(locationService.getDefaultLocationClientOption());
+        } else if (type == 1) {
+            locationService.setLocationOption(locationService.getOption());
+        }
+        locationService.start();// 定位SDK
     }
 
     @Override
@@ -112,4 +144,15 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
         }
         mAdapter.notifyDataSetChanged();
     }
+
+    private BDLocationListener mLocationListener = new BDLocationListener() {
+        @Override
+        public void onReceiveLocation(BDLocation bdLocation) {
+            if (null != bdLocation && bdLocation.getLocType() != BDLocation.TypeServerError) {
+                MyApplication.getInstance().lat = bdLocation.getLatitude();
+                MyApplication.getInstance().lng = bdLocation.getLongitude();
+                MyApplication.getInstance().address = bdLocation.getAddrStr();
+            }
+        }
+    };
 }

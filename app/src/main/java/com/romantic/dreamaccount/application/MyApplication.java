@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.util.DisplayMetrics;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.romantic.dreamaccount.R;
 import com.romantic.dreamaccount.config.SDKConfig;
 import com.romantic.dreamaccount.db.DBAccount;
 import com.romantic.dreamaccount.log.LogUtil;
+import com.romantic.dreamaccount.service.LocationService;
 
 /**
  * Created by ${chenM} on 2018/7/25.
@@ -18,6 +20,10 @@ public class MyApplication extends Application {
     public int screenWidth = 0;
     public int screenHeight = 0;
     public DBAccount Db;
+    public LocationService locationService;
+    public double lat = 0;//current lat
+    public double lng = 0;//current lng
+    public String address = "";//current address
 
     @Override
     public void onCreate() {
@@ -40,6 +46,8 @@ public class MyApplication extends Application {
 
     private void initConfig(){
         SDKConfig.initHttp(getApplicationContext(),environmentConfiguration());
+        locationService = new LocationService(getApplicationContext());
+        SDKInitializer.initialize(getApplicationContext());
     }
 
     /**
