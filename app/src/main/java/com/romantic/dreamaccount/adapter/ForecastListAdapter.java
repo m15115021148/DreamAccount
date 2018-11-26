@@ -1,6 +1,8 @@
 package com.romantic.dreamaccount.adapter;
 
+import android.text.Html;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -37,20 +39,43 @@ public class ForecastListAdapter extends XRecyclerViewAdapter<AccountsBean> {
     }
 
     public class Holder extends BaseViewHolder{
+        private View mItemView;
         @BindView(R.id.time)
         public TextView mTime;
         @BindView(R.id.layout)
         public LinearLayout mLayout;
+        @BindView(R.id.upload)
+        public ImageView mUpload;
+        @BindView(R.id.name)
+        public TextView mName;
+        @BindView(R.id.money)
+        public TextView mMoney;
+        @BindView(R.id.detail)
+        public TextView mDetail;
+        @BindView(R.id.address)
+        public TextView mAddress;
 
         public Holder(View itemView) {
             super(itemView);
+            mItemView = itemView;
         }
 
         @Override
         public void initData(final int position) {
             AccountsBean bean = getData().get(position);
             mTime.setText(bean.getTime());
-            mLayout.setOnClickListener(new View.OnClickListener() {
+            mName.setText(bean.getKind());
+            mMoney.setText(Html.fromHtml(String.format(
+                    mItemView.getResources().getString(R.string.account_money), bean.getType() == 0 ? "#00FF00" : "#FF0000", bean.getMoney())
+            ));
+
+            mDetail.setText(Html.fromHtml(String.format(
+                    mItemView.getResources().getString(R.string.account_detail), bean.getNote()
+            )));
+
+            mAddress.setText(bean.getAddress());
+
+            mUpload.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (mCallBack != null )mCallBack.onUploadListener(position);

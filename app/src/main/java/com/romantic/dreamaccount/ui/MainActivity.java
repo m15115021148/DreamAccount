@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.romantic.dreamaccount.R;
 import com.romantic.dreamaccount.adapter.MainFragmentAdapter;
@@ -13,6 +14,7 @@ import com.romantic.dreamaccount.fragment.ForecastFragment;
 import com.romantic.dreamaccount.fragment.ListFragment;
 import com.romantic.dreamaccount.fragment.MySelfFragment;
 import com.romantic.dreamaccount.present.ui.MainP;
+import com.sensology.framelib.router.Router;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,8 @@ public class MainActivity extends BaseActivity<MainP> implements TabLayout.OnTab
     private MainFragmentAdapter mAdapter;
     @BindArray(R.array.MainTabLayout)
     public String[] mData;
+    @BindView(R.id.add)
+    public ImageView mAdd;
 
     @Override
     public int getLayoutId() {
@@ -44,12 +48,17 @@ public class MainActivity extends BaseActivity<MainP> implements TabLayout.OnTab
     @Override
     public void initData(Bundle savedInstanceState) {
         mContext = this;
+        mAdd.setOnClickListener(this);
         initTabLayout();
     }
 
     @Override
     public void onClick(View v) {
-
+        if (v == mAdd){
+            Router.newIntent(context)
+                    .to(AddAccountActivity.class)
+                    .launch();
+        }
     }
 
     @Override
@@ -86,6 +95,7 @@ public class MainActivity extends BaseActivity<MainP> implements TabLayout.OnTab
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
+        mAdd.setVisibility(tab.getPosition()==0?View.VISIBLE:View.GONE);
         mViewPager.setCurrentItem(tab.getPosition());
     }
 

@@ -56,6 +56,7 @@
     <color name="shadow">#cc222222</color>
     <color name="red_800">#ffb93221</color>
     <color name="green_1">#AA00FF00</color>
+    <color name="green">#00FF00</color>
 
     <color name="darkRed">#702216</color>
     <color name="lightGray">#323232</color>

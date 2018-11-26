@@ -3,6 +3,7 @@ package com.romantic.dreamaccount.http;
 
 import com.romantic.dreamaccount.bean.AccountResult;
 import com.romantic.dreamaccount.bean.BaseResult;
+import com.romantic.dreamaccount.bean.KindResult;
 import com.romantic.dreamaccount.bean.LoginResult;
 
 import java.util.Map;
@@ -37,6 +38,10 @@ public interface ApiService {
     @POST("dbAction_getAccountList.do")
     @FormUrlEncoded
     Flowable<AccountResult> getAccountList(@FieldMap Map<String, Object> map);
+
+    @POST("dbAction_getKinds.do")
+    @FormUrlEncoded
+    Flowable<KindResult> getKind(@FieldMap Map<String, Object> map);
 
 
     @Multipart

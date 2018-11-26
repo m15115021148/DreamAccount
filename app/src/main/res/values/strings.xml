@@ -20,4 +20,9 @@
     <string name="login">登陆</string>
     <string name="login_user_name_no_empty">用户名不能为空</string>
     <string name="login_user_pwd_no_empty">密码不能为空</string>
+
+    <string name="add_account_title">记账</string>
+
+    <string name="income">收入</string>
+    <string name="expenses">支出</string>
 </resources>
