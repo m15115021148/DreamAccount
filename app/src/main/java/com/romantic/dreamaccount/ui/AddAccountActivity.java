@@ -80,6 +80,9 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
 
     }
 
+    /**
+     * init location
+     */
     private void initLocationService(){
         locationService = MyApplication.getInstance().locationService;
         locationService.registerListener(mLocationListener);
