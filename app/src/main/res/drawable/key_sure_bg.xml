@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="1024"
+    android:viewportHeight="1024">
+
+    <path
+        android:fillColor="@color/title_bg_dan"
+        android:pathData="M512 0a512 512 0 1 0 512 512 512 512 0 0 0-512-512z m312.888889 347.022222l-406.755556 406.755556a24.462222 24.462222 0 0 1-36.977777 0l-17.066667-17.066667c-5.688889-5.688889-5.688889-11.377778-8.533333-17.066667L199.111111 537.6a24.462222 24.462222 0 0 1 0-36.977778l17.066667-17.066666a30.151111 30.151111 0 0 1 36.977778 0l153.6 176.355555 364.088888-364.088889a24.462222 24.462222 0 0 1 36.977778 0l17.066667 17.066667a21.617778 21.617778 0 0 1 0 34.133333z" />
+</vector>

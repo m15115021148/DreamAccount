@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,17 +16,17 @@ import com.romantic.dreamaccount.application.MyApplication;
 import com.romantic.dreamaccount.bean.KindResult;
 import com.romantic.dreamaccount.present.ui.AddAccountP;
 import com.romantic.dreamaccount.service.LocationService;
+import com.romantic.dreamaccount.view.keyboard.KeyboardUtil;
+import com.romantic.dreamaccount.view.keyboard.MyKeyBoardView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 
-public class AddAccountActivity extends BaseActivity<AddAccountP> implements AddAccountKindAdapter.OnCallBackKind {
+public class AddAccountActivity extends BaseActivity<AddAccountP> implements AddAccountKindAdapter.OnCallBackKind, KeyboardUtil.OnKeyBoardCallBack {
     @BindView(R.id.back)
     public LinearLayout mBack;
-    @BindView(R.id.title)
-    public TextView mTitle;
     @BindView(R.id.recyclerView)
     public RecyclerView mRecyclerView;
     private AddAccountKindAdapter mAdapter;
@@ -33,9 +34,17 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
     public TextView mExpenses;
     @BindView(R.id.income)
     public TextView mIncome;
+    @BindView(R.id.note)
+    public EditText mNote;
+    @BindView(R.id.keyboard)
+    public MyKeyBoardView mKeyboard;
+    @BindView(R.id.money)
+    public EditText mMoney;
+
     private int type = 1;// 1 expenses; 0 income
     private List<KindResult.Data> mKindList = new ArrayList<>();
     private LocationService locationService;
+    private KeyboardUtil mKeyUtil;
 
     @Override
     public int getLayoutId() {
@@ -50,13 +59,17 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
     @Override
     public void initData(Bundle savedInstanceState) {
         mBack.setOnClickListener(this);
-        mTitle.setText(R.string.add_account_title);
         mExpenses.setOnClickListener(this);
         mIncome.setOnClickListener(this);
         mExpenses.setSelected(true);
         mIncome.setSelected(false);
 
         initKindRecycleView();
+
+        mKeyUtil = new KeyboardUtil(this, mKeyboard);
+        mKeyUtil.setCallBack(this);
+        mKeyUtil.attachTo(mMoney);
+
         getP().getKind();
     }
 
@@ -83,7 +96,7 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
     /**
      * init location
      */
-    private void initLocationService(){
+    private void initLocationService() {
         locationService = MyApplication.getInstance().locationService;
         locationService.registerListener(mLocationListener);
         //注册监听
@@ -101,12 +114,14 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
         super.onClick(v);
         if (v == mBack) finish();
         if (v == mExpenses) {
+            if (mExpenses.isSelected()) return;
             mExpenses.setSelected(!mExpenses.isSelected());
             mIncome.setSelected(!mExpenses.isSelected());
             type = 1;
             mAdapter.setData(getKindData(type));
         }
         if (v == mIncome) {
+            if (mIncome.isSelected()) return;
             mIncome.setSelected(!mIncome.isSelected());
             mExpenses.setSelected(!mIncome.isSelected());
             type = 0;
@@ -129,8 +144,8 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
     private List<KindResult.Data> getKindData(int type) {
         List<KindResult.Data> list = new ArrayList<>();
         int i = 0;
-        for (KindResult.Data data : mKindList) {
-            if (data.getType() == type) {
+        for (KindResult.Data data : mKindList) {//2 other all expenses and income
+            if (data.getType() == type || data.getType() == 2) {
                 data.setSelect(i == 0);
                 list.add(data);
                 i++;
@@ -158,4 +173,13 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
             }
         }
     };
+
+    @Override
+    public void onClickSure() {
+
+    }
+
+    @Override
+    public void onClickCancel() {
+    }
 }

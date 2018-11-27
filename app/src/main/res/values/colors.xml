@@ -24,7 +24,7 @@
 
     <color name="themeColor">#51ADA2</color>
 
-    <color name="title_bg_dan">#99019b97</color>
+    <color name="title_bg_dan">#51ADA2</color>
 
     <color name="white">#FFFFFF</color>
 
@@ -69,4 +69,9 @@
     <color name="title_start">#101212</color>
     <color name="title_center">#191E22</color>
     <color name="title_end">#CC191E22</color>
+
+    <color name="key_ok_color">#1280FA</color>
+    <color name="key_ok_color_pressed">#0174f2</color>
+    <color name="key_backspace_color">#DA6858</color>
+    <color name="key_backspace_color_pressed">#FF6858</color>
 </resources>

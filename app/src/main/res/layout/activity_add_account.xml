@@ -1,38 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical"
     tools:context="com.romantic.dreamaccount.ui.AddAccountActivity">
 
-    <include
-        layout="@layout/include_title_layout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="@dimen/x90"
+        android:background="@color/title_bg_dan">
 
-    <LinearLayout
+        <LinearLayout
+            android:id="@+id/back"
+            android:layout_width="@dimen/x100"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="@dimen/x25"
+                android:layout_height="@dimen/x30"
+                android:layout_marginStart="@dimen/x20"
+                android:background="@drawable/back_return" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/expenses"
+                style="@style/AccountTextViewStyle"
+                android:background="@drawable/selector_expenses_bg"
+                android:text="@string/expenses" />
+
+            <TextView
+                android:id="@+id/income"
+                style="@style/AccountTextViewStyle"
+                android:background="@drawable/selector_income_bg"
+                android:text="@string/income" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/note"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/x20"
-        android:orientation="horizontal">
+        android:layout_height="@dimen/x80"
+        android:layout_marginStart="@dimen/x20"
+        android:layout_marginTop="@dimen/x40"
+        android:layout_marginEnd="@dimen/x20"
+        android:layout_marginBottom="@dimen/x40"
+        android:background="@drawable/shape_kind_note_bg"
+        android:drawableStart="@drawable/icon_kind_note"
+        android:drawablePadding="@dimen/x20"
+        android:inputType="text"
+        android:paddingStart="@dimen/x20"
+        android:paddingEnd="@dimen/x20"
+        android:singleLine="true"
+        android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/expenses"
-            style="@style/AccountTextViewStyle"
-            android:background="@drawable/selector_expenses_bg"
-            android:text="@string/expenses" />
-
-        <TextView
-            android:id="@+id/income"
-            style="@style/AccountTextViewStyle"
-            android:layout_marginStart="@dimen/x20"
-            android:background="@drawable/selector_income_bg"
-            android:text="@string/income" />
-
-
-    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -40,5 +77,48 @@
         android:layout_height="wrap_content"
         android:overScrollMode="never"
         android:scrollbars="none" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x2"
+            android:layout_above="@+id/money"
+            android:background="@color/pop_txt_bg" />
+
+        <EditText
+            android:id="@+id/money"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x80"
+            android:layout_above="@+id/keyboard"
+            android:layout_marginStart="@dimen/x20"
+            android:layout_marginEnd="@dimen/x20"
+            android:background="@null"
+            android:drawableStart="@drawable/icon_money_bg"
+            android:drawablePadding="@dimen/x20"
+            android:gravity="center_vertical|end"
+            android:maxLength="8"
+            android:inputType="text"
+            android:paddingStart="@dimen/x20"
+            android:paddingEnd="@dimen/x20"
+            android:singleLine="true"
+            android:textColor="@color/black" />
+
+        <com.romantic.dreamaccount.view.keyboard.MyKeyBoardView
+            android:id="@+id/keyboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:keyBackground="@drawable/bg_keyboardview"
+            android:keyPreviewOffset="0dp"
+            android:keyTextColor="#000"
+            android:shadowColor="#fff"
+            android:shadowRadius="0.0" />
+
+    </RelativeLayout>
+
 
 </LinearLayout>

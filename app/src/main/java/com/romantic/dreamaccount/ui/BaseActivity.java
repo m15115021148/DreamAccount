@@ -45,9 +45,9 @@ public abstract class BaseActivity<P extends IPresent> extends XActivity<P> impl
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             }
 
-            this.getWindow()
-                    .getDecorView()
-                    .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+//            this.getWindow()
+//                    .getDecorView()
+//                    .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         } catch (Exception e) {
             e.printStackTrace();

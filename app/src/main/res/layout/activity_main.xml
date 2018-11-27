@@ -10,14 +10,14 @@
     <RelativeLayout
         android:paddingStart="@dimen/x20"
         android:paddingEnd="@dimen/x20"
-        android:background="@color/white"
+        android:background="@color/title_bg_dan"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x90">
 
         <TextView
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/x35"
             android:text="@string/app_name"
             android:layout_width="wrap_content"

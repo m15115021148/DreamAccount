@@ -63,7 +63,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.AddAccountActivity"></activity>
+        <activity android:name=".ui.AddAccountActivity"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>

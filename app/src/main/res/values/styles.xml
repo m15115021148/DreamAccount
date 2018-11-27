@@ -3,9 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/title_bg_dan</item>
+        <item name="colorPrimaryDark">@color/title_bg_dan</item>
+        <item name="colorAccent">@color/title_bg_dan</item>
 
         <item name="android:launchMode">singleTask</item>
         <item name="android:windowNoTitle">true</item>
@@ -23,11 +23,11 @@
     </style>
 
     <style name="AccountTextViewStyle">
-        <item name="android:layout_width">@dimen/x200</item>
-        <item name="android:layout_height">@dimen/x70</item>
+        <item name="android:layout_width">@dimen/x120</item>
+        <item name="android:layout_height">@dimen/x60</item>
         <item name="android:gravity">center</item>
         <item name="android:singleLine">true</item>
-        <item name="android:textSize">@dimen/x30</item>
+        <item name="android:textSize">@dimen/x28</item>
         <item name="android:textColor">@drawable/selector_account_text_color</item>
     </style>
 
