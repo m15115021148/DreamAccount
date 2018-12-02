@@ -1,11 +1,12 @@
 package com.romantic.dreamaccount.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by ${chenM} on 2018/11/21.
  */
-public class KindResult extends BaseResult {
+public class KindResult extends BaseResult implements Serializable {
     private List<Data> data;
 
     public List<Data> getData() {
@@ -16,7 +17,7 @@ public class KindResult extends BaseResult {
         this.data = data;
     }
 
-    public static class Data{
+    public static class Data implements Serializable{
         private String kind;
         private int type;//0 income ;1 expenses; 2 both
         private String kindID;

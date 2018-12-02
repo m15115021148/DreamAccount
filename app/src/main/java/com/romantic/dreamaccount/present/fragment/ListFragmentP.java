@@ -38,7 +38,7 @@ public class ListFragmentP extends XPresent<ListFragment> {
                 .subscribe(new CustomApiSubscriber<AccountResult>() {
                     @Override
                     protected void onFail(NetError error) {
-                        ToastUtil.showBottomShort(error.getMessage());
+//                        ToastUtil.showBottomShort(error.getMessage());
                     }
 
                     @Override

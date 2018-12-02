@@ -54,6 +54,7 @@
     </RelativeLayout>
 
     <EditText
+        android:textSize="@dimen/x30"
         android:id="@+id/note"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x80"

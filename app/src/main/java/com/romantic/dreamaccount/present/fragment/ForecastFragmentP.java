@@ -1,6 +1,7 @@
 package com.romantic.dreamaccount.present.fragment;
 
-import com.romantic.dreamaccount.bean.AccountsBean;
+import com.romantic.dreamaccount.R;
+import com.romantic.dreamaccount.db.AccountsBean;
 import com.romantic.dreamaccount.bean.BaseResult;
 import com.romantic.dreamaccount.config.Comment;
 import com.romantic.dreamaccount.fragment.ForecastFragment;
@@ -41,7 +42,7 @@ public class ForecastFragmentP extends XPresent<ForecastFragment> {
                 .subscribe(new CustomApiSubscriber<BaseResult>() {
                     @Override
                     protected void onFail(NetError error) {
-                        ToastUtil.showBottomShort(error.getMessage());
+                        ToastUtil.showBottomShort(getV().getString(R.string.net_error));
                     }
 
                     @Override

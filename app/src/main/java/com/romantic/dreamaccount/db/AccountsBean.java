@@ -1,4 +1,6 @@
-package com.romantic.dreamaccount.bean;
+package com.romantic.dreamaccount.db;
+
+import com.romantic.dreamaccount.bean.BaseResult;
 
 import java.io.Serializable;
 

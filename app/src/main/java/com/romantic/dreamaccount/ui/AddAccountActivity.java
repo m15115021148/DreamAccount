@@ -13,11 +13,18 @@ import com.baidu.location.BDLocationListener;
 import com.romantic.dreamaccount.R;
 import com.romantic.dreamaccount.adapter.AddAccountKindAdapter;
 import com.romantic.dreamaccount.application.MyApplication;
+import com.romantic.dreamaccount.config.Comment;
+import com.romantic.dreamaccount.db.AccountsBean;
 import com.romantic.dreamaccount.bean.KindResult;
+import com.romantic.dreamaccount.eventBus.RefreshEvent;
 import com.romantic.dreamaccount.present.ui.AddAccountP;
 import com.romantic.dreamaccount.service.LocationService;
+import com.romantic.dreamaccount.util.ToastUtil;
 import com.romantic.dreamaccount.view.keyboard.KeyboardUtil;
 import com.romantic.dreamaccount.view.keyboard.MyKeyBoardView;
+import com.sensology.framelib.cache.SharedPref;
+import com.sensology.framelib.event.BusProvider;
+import com.sensology.framelib.kit.Kits;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +50,7 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
 
     private int type = 1;// 1 expenses; 0 income
     private List<KindResult.Data> mKindList = new ArrayList<>();
+    private int currKindPosition = 0;
     private LocationService locationService;
     private KeyboardUtil mKeyUtil;
 
@@ -70,6 +78,12 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
         mKeyUtil.setCallBack(this);
         mKeyUtil.attachTo(mMoney);
 
+        KindResult result = SharedPref.getInstance(context).getPreferences(Comment.PrefKey.KIND_DATA);
+
+        if (result != null && result.getData() != null && result.getData().size()>0){
+            mKindList = result.getData();
+            mAdapter.setData(getKindData(type));
+        }
         getP().getKind();
     }
 
@@ -90,7 +104,6 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
         locationService.unregisterListener(mLocationListener);
         locationService.stop();
         super.onStop();
-
     }
 
     /**
@@ -137,6 +150,7 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
             }
 
             mKindList = result.getData();
+            SharedPref.getInstance(context).setPreferences(Comment.PrefKey.KIND_DATA,result);
         }
         mAdapter.setData(getKindData(type));
     }
@@ -157,6 +171,7 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
 
     @Override
     public void onClickKindListener(int position) {
+        currKindPosition = position;
         for (int i = 0, len = mAdapter.getData().size(); i < len; i++) {
             mAdapter.getData().get(i).setSelect(position == i);
         }
@@ -176,7 +191,32 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
 
     @Override
     public void onClickSure() {
+        if (Kits.Empty.check(mNote.getText().toString())){
+            mNote.setFocusable(true);
+            mNote.setCursorVisible(true);
+            return;
+        }
 
+        if (Kits.Empty.check(mMoney.getText().toString())){
+            ToastUtil.showBottomShort(getString(R.string.please_input_money));
+            return;
+        }
+
+        AccountsBean bean = new AccountsBean();
+        bean.setType(type);
+        bean.setMoney(Double.parseDouble(mMoney.getText().toString()));
+        bean.setKind(mAdapter.getData().get(currKindPosition).getKind());
+        bean.setNote(mNote.getText().toString());
+        bean.setTime(Kits.Date.getCurrentTime());
+        bean.setLat(MyApplication.getInstance().lat);
+        bean.setLng(MyApplication.getInstance().lng);
+        bean.setAddress(MyApplication.getInstance().address);
+
+        MyApplication.getInstance().Db.insert(bean);
+
+        BusProvider.getBus().post(new RefreshEvent(true));
+
+        finish();
     }
 
     @Override

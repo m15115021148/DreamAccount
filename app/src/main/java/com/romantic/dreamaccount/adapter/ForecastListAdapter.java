@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.romantic.dreamaccount.R;
-import com.romantic.dreamaccount.bean.AccountsBean;
+import com.romantic.dreamaccount.db.AccountsBean;
 import com.sensology.framelib.adapter.BaseViewHolder;
 import com.sensology.framelib.adapter.XRecyclerViewAdapter;
 

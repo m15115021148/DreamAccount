@@ -41,6 +41,16 @@ public class LoginActivity extends BaseActivity<LoginP> {
 
     @Override
     public void initData(Bundle savedInstanceState) {
+
+        if (SharedPref.getInstance(this).getBoolean(Comment.PrefKey.LOGIN_FIRST,false)){
+            Comment.USER_ID = SharedPref.getInstance(context).getInt(Comment.PrefKey.USER_ID,0);
+            Router.newIntent(this)
+                    .to(MainActivity.class)
+                    .launch();
+            finish();
+            return;
+        }
+
         mTitle.setText(getString(R.string.login));
         mBack.setOnClickListener(this);
         mBack.setVisibility(View.GONE);
@@ -75,6 +85,7 @@ public class LoginActivity extends BaseActivity<LoginP> {
         SharedPref.getInstance(context).putString(Comment.PrefKey.USER_NAME,result.getName());
         SharedPref.getInstance(context).putString(Comment.PrefKey.USER_PWD,pwd);
         SharedPref.getInstance(context).putInt(Comment.PrefKey.USER_ID,result.getUserID());
+        SharedPref.getInstance(this).putBoolean(Comment.PrefKey.LOGIN_FIRST,true);
         Comment.USER_ID = result.getUserID();
 
         Router.newIntent(context)

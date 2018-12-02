@@ -24,12 +24,12 @@ public class AddAccountP extends XPresent<AddAccountActivity> {
         HttpManager.getApiService().getKind(new HashMap<String, Object>())
                 .compose(XApi.<KindResult>getApiTransformer())
                 .compose(XApi.<KindResult>getScheduler())
-                .compose(new DialogTransformer(getV()).<KindResult>transformer())
+//                .compose(new DialogTransformer(getV()).<KindResult>transformer())
                 .compose(getV().<KindResult>bindToLifecycle())
                 .subscribe(new CustomApiSubscriber<KindResult>() {
                     @Override
                     protected void onFail(NetError error) {
-                        ToastUtil.showBottomShort(error.getMessage());
+//                        ToastUtil.showBottomShort(error.getMessage());
                     }
 
                     @Override

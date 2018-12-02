@@ -143,7 +143,7 @@ public class SharedPref implements ICache {
      * @param name
      */
     @SuppressWarnings("unchecked")
-    public <T> T getPreferences(String name, T obj) {
+    public <T> T getPreferences(String name) {
         ByteArrayInputStream bais = null;
         ObjectInputStream ois = null;
         try {

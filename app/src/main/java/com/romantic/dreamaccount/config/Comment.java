@@ -15,6 +15,8 @@ public class Comment {
         public static final String USER_NAME = "user_name";
         public static final String USER_PWD = "user_password";
         public static final String USER_ID = "user_id";
+        public static final String LOGIN_FIRST = "login_first";
+        public static final String KIND_DATA = "kind_data";
     }
 
 }
