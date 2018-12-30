@@ -8,42 +8,75 @@
     tools:context=".ui.MainActivity">
 
     <RelativeLayout
-        android:paddingStart="@dimen/x20"
-        android:paddingEnd="@dimen/x20"
-        android:background="@color/title_bg_dan"
+        android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x90">
+        android:layout_height="@dimen/x90"
+        android:background="@color/title_bg_dan"
+        android:paddingStart="@dimen/x20"
+        android:paddingEnd="@dimen/x20">
 
         <TextView
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
-            android:textColor="@color/white"
-            android:textSize="@dimen/x35"
-            android:text="@string/app_name"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x35" />
 
         <ImageView
             android:id="@+id/add"
-            android:background="@drawable/add_account"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
             android:layout_width="@dimen/x48"
-            android:layout_height="@dimen/x48" />
+            android:layout_height="@dimen/x48"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/add_account" />
+
+        <LinearLayout
+            android:id="@+id/checkLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+
+            <TextView
+                android:id="@+id/expenses"
+                style="@style/AccountTextViewStyle"
+                android:background="@drawable/selector_expenses_bg"
+                android:text="@string/expenses" />
+
+            <TextView
+                android:id="@+id/all"
+                style="@style/AccountTextViewStyle"
+                android:background="@drawable/selector_all_bg"
+                android:text="@string/all" />
+
+            <TextView
+                android:id="@+id/income"
+                style="@style/AccountTextViewStyle"
+                android:background="@drawable/selector_income_bg"
+                android:text="@string/income" />
+
+
+        </LinearLayout>
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:overScrollMode="never"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPager"
-            android:overScrollMode="never"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/tabLayout" />
+            android:layout_above="@+id/tabLayout"
+            android:overScrollMode="never" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"

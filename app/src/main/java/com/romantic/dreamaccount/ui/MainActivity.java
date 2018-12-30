@@ -5,15 +5,20 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.romantic.dreamaccount.R;
 import com.romantic.dreamaccount.adapter.MainFragmentAdapter;
+import com.romantic.dreamaccount.eventBus.TypeEvent;
 import com.romantic.dreamaccount.fragment.BaseFragment;
 import com.romantic.dreamaccount.fragment.CheckFragment;
 import com.romantic.dreamaccount.fragment.ForecastFragment;
 import com.romantic.dreamaccount.fragment.ListFragment;
 import com.romantic.dreamaccount.fragment.MySelfFragment;
 import com.romantic.dreamaccount.present.ui.MainP;
+import com.sensology.framelib.event.BusProvider;
 import com.sensology.framelib.router.Router;
 
 import java.util.ArrayList;
@@ -34,6 +39,17 @@ public class MainActivity extends BaseActivity<MainP> implements TabLayout.OnTab
     public String[] mData;
     @BindView(R.id.add)
     public ImageView mAdd;
+    @BindView(R.id.title)
+    public TextView mTitle;
+    @BindView(R.id.checkLayout)
+    public LinearLayout mCheckLayout;
+    @BindView(R.id.expenses)
+    public TextView mExpenses;
+    @BindView(R.id.all)
+    public TextView mAll;
+    @BindView(R.id.income)
+    public TextView mIncome;
+    private int type = 1;//1 expenses ; 0 income  ; 2 all
 
     @Override
     public int getLayoutId() {
@@ -49,15 +65,31 @@ public class MainActivity extends BaseActivity<MainP> implements TabLayout.OnTab
     public void initData(Bundle savedInstanceState) {
         mContext = this;
         mAdd.setOnClickListener(this);
+        mExpenses.setOnClickListener(this);
+        mAll.setOnClickListener(this);
+        mIncome.setOnClickListener(this);
+        resetState(type);
         initTabLayout();
     }
 
     @Override
-    public void onClick(View v) {
-        if (v == mAdd){
+    public void onClick(View view) {
+        if (view == mAdd){
             Router.newIntent(context)
                     .to(AddAccountActivity.class)
                     .launch();
+        }
+        if (view == mExpenses){
+            type = 1;
+            resetState(type);
+        }
+        if (view == mIncome){
+            type = 0;
+            resetState(type);
+        }
+        if (view == mAll){
+            type = 2;
+            resetState(type);
         }
     }
 
@@ -96,6 +128,8 @@ public class MainActivity extends BaseActivity<MainP> implements TabLayout.OnTab
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
         mAdd.setVisibility(tab.getPosition()==0?View.VISIBLE:View.GONE);
+        mTitle.setVisibility(tab.getPosition()!=2?View.VISIBLE:View.GONE);
+        mCheckLayout.setVisibility(tab.getPosition()==2?View.VISIBLE:View.GONE);
         mViewPager.setCurrentItem(tab.getPosition());
     }
 
@@ -105,6 +139,20 @@ public class MainActivity extends BaseActivity<MainP> implements TabLayout.OnTab
 
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
+    }
+
+    private void resetState(int type){
+        mExpenses.setSelected(false);
+        mAll.setSelected(false);
+        mIncome.setSelected(false);
+        if (type == 1){
+            mExpenses.setSelected(true);
+        }else if (type == 0){
+            mIncome.setSelected(true);
+        }else if (type == 2){
+            mAll.setSelected(true);
+        }
+        BusProvider.getBus().post(new TypeEvent(type));
     }
 
 }
