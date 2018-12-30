@@ -17,14 +17,10 @@ import butterknife.BindView;
  * Created by ${chenM} on 2018/11/21.
  */
 public class AddAccountKindAdapter extends XRecyclerViewAdapter<KindResult.Data> {
-    private OnCallBackKind mCallBack;
+    private AddListAdapter.OnCallBackKind mCallBack;
 
-    public AddAccountKindAdapter(OnCallBackKind callBack){
+    public AddAccountKindAdapter(AddListAdapter.OnCallBackKind callBack){
         this.mCallBack = callBack;
-    }
-
-    public interface OnCallBackKind{
-        void onClickKindListener(int position);
     }
 
     @Override

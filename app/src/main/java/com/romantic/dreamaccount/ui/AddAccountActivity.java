@@ -1,8 +1,8 @@
 package com.romantic.dreamaccount.ui;
 
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.view.ViewPager;
+import android.util.SparseArray;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -11,8 +11,9 @@ import android.widget.TextView;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.romantic.dreamaccount.R;
-import com.romantic.dreamaccount.adapter.AddAccountKindAdapter;
+import com.romantic.dreamaccount.adapter.AddListAdapter;
 import com.romantic.dreamaccount.application.MyApplication;
+import com.romantic.dreamaccount.bean.KindModel;
 import com.romantic.dreamaccount.config.Comment;
 import com.romantic.dreamaccount.db.AccountsBean;
 import com.romantic.dreamaccount.bean.KindResult;
@@ -31,12 +32,11 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class AddAccountActivity extends BaseActivity<AddAccountP> implements AddAccountKindAdapter.OnCallBackKind, KeyboardUtil.OnKeyBoardCallBack {
+public class AddAccountActivity extends BaseActivity<AddAccountP> implements AddListAdapter.OnCallBackKind, KeyboardUtil.OnKeyBoardCallBack {
     @BindView(R.id.back)
     public LinearLayout mBack;
-    @BindView(R.id.recyclerView)
-    public RecyclerView mRecyclerView;
-    private AddAccountKindAdapter mAdapter;
+    @BindView(R.id.viewPager)
+    public ViewPager mVp;
     @BindView(R.id.expenses)
     public TextView mExpenses;
     @BindView(R.id.income)
@@ -48,11 +48,16 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
     @BindView(R.id.money)
     public EditText mMoney;
 
-    private int type = 1;// 1 expenses; 0 income
+    private int typeIncome = 0;// 1 expenses; 0 income
+    private int typeExpenses = 1;
+    private int currKindType = 0;
     private List<KindResult.Data> mKindList = new ArrayList<>();
     private int currKindPosition = 0;
     private LocationService locationService;
     private KeyboardUtil mKeyUtil;
+
+    private AddListAdapter mAdapter;
+    private SparseArray<List<KindResult.Data>> mArray = new SparseArray<>();
 
     @Override
     public int getLayoutId() {
@@ -72,25 +77,45 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
         mExpenses.setSelected(true);
         mIncome.setSelected(false);
 
-        initKindRecycleView();
+        initKindView();
 
         mKeyUtil = new KeyboardUtil(this, mKeyboard);
         mKeyUtil.setCallBack(this);
         mKeyUtil.attachTo(mMoney);
 
         KindResult result = SharedPref.getInstance(context).getPreferences(Comment.PrefKey.KIND_DATA);
+        mArray.clear();
 
         if (result != null && result.getData() != null && result.getData().size()>0){
             mKindList = result.getData();
-            mAdapter.setData(getKindData(type));
+            mAdapter.setData(getData());
         }
         getP().getKind();
     }
 
-    private void initKindRecycleView() {
-        mRecyclerView.setLayoutManager(new GridLayoutManager(context, 5));
-        mAdapter = new AddAccountKindAdapter(this);
-        mRecyclerView.setAdapter(mAdapter);
+    private void initKindView() {
+        mAdapter = new AddListAdapter(this);
+        mVp.setAdapter(mAdapter);
+
+        mVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                currKindType = position;
+                mExpenses.setSelected(position==0);
+                mIncome.setSelected(position==1);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
     }
 
     @Override
@@ -130,15 +155,15 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
             if (mExpenses.isSelected()) return;
             mExpenses.setSelected(!mExpenses.isSelected());
             mIncome.setSelected(!mExpenses.isSelected());
-            type = 1;
-            mAdapter.setData(getKindData(type));
+            currKindType = 0;
+            mVp.setCurrentItem(currKindType);
         }
         if (v == mIncome) {
             if (mIncome.isSelected()) return;
             mIncome.setSelected(!mIncome.isSelected());
             mExpenses.setSelected(!mIncome.isSelected());
-            type = 0;
-            mAdapter.setData(getKindData(type));
+            currKindType = 1;
+            mVp.setCurrentItem(currKindType);
         }
     }
 
@@ -152,7 +177,7 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
             mKindList = result.getData();
             SharedPref.getInstance(context).setPreferences(Comment.PrefKey.KIND_DATA,result);
         }
-        mAdapter.setData(getKindData(type));
+        mAdapter.setData(getData());
     }
 
     private List<KindResult.Data> getKindData(int type) {
@@ -168,14 +193,31 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
         return list;
     }
 
+    private List<KindModel> getData() {
+        List<KindModel> list = new ArrayList<>();
+
+        for (int i = 1; i >= 0; i--) {
+            KindModel model = new KindModel();
+            KindResult k = new KindResult();
+            k.setData(getKindData(i));
+            model.setData(k);
+            list.add(model);
+        }
+
+        return list;
+    }
+
 
     @Override
     public void onClickKindListener(int position) {
-        currKindPosition = position;
-        for (int i = 0, len = mAdapter.getData().size(); i < len; i++) {
-            mAdapter.getData().get(i).setSelect(position == i);
-        }
-        mAdapter.notifyDataSetChanged();
+//        currKindPosition = position;
+//        for (int k=0,size = mAdapter.getData().size(); k<size;k++){
+//            for (int i = 0, len = mAdapter.getData().get(k).size(); i < len; i++) {
+//                mAdapter.getData().get(k).get(i).setSelect(false);
+//            }
+//        }
+//        mAdapter.getData().get(currKindType).get(currKindPosition).setSelect(true);
+//        mAdapter.notifyDataSetChanged();
     }
 
     private BDLocationListener mLocationListener = new BDLocationListener() {
@@ -203,9 +245,9 @@ public class AddAccountActivity extends BaseActivity<AddAccountP> implements Add
         }
 
         AccountsBean bean = new AccountsBean();
-        bean.setType(type);
+        bean.setType(currKindType==0?1:0);
         bean.setMoney(Double.parseDouble(mMoney.getText().toString()));
-        bean.setKind(mAdapter.getData().get(currKindPosition).getKind());
+//        bean.setKind(mAdapter.getData().get(currKindType).get(currKindPosition).getKind());
         bean.setNote(mNote.getText().toString());
         bean.setTime(Kits.Date.getCurrentTime());
         bean.setLat(MyApplication.getInstance().lat);

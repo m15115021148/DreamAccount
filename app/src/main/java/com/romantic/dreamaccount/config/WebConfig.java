@@ -6,7 +6,7 @@ package com.romantic.dreamaccount.config;
 public class WebConfig {
     public static final String HOST_ADDRESS_IP_TESTING = "http://192.168.0.106:8989/AccountDream/";
 
-    public static final String HOST_ADDRESS_IP_PRODUCT = "http://192.168.43.57:8989/AccountDream/";
+    public static final String HOST_ADDRESS_IP_PRODUCT = "http://192.168.12.170:8989/AccountDream/";
 
     public static String baseUrl;
 
