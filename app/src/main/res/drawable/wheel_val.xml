@@ -1,0 +1,12 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <gradient
+        android:angle="90"
+        android:centerColor="@color/whell_item_bg_select"
+        android:endColor="@color/whell_item_bg_select"
+        android:startColor="@color/whell_item_bg_select" />
+
+    <stroke
+        android:width="0.01dp"
+        android:color="@color/whell_item_bg_select" />
+</shape>

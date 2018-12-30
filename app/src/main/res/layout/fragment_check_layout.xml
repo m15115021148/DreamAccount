@@ -5,6 +5,38 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x400" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x90"
+        android:layout_margin="@dimen/x20"
+        android:background="@drawable/shape_time_bg"
+        android:gravity="center"
+        android:shadowColor="@color/pop_txt_bg"
+        android:shadowDx="5"
+        android:shadowRadius="5"
+        android:text="@string/check_select_time"
+        android:textColor="@drawable/selector_time_color_bg"
+        android:textSize="@dimen/x30" />
+
+    <TextView
+        android:id="@+id/high"
+        android:textSize="@dimen/x26"
+        android:layout_marginTop="@dimen/x20"
+        android:background="@drawable/select_high_bg"
+        android:layout_marginEnd="@dimen/x20"
+        android:gravity="center"
+        android:layout_gravity="center_vertical|end"
+        android:padding="@dimen/x10"
+        android:text="@string/check_high"
+        android:layout_width="@dimen/x120"
+        android:layout_height="wrap_content" />
+
 
 
 </LinearLayout>
